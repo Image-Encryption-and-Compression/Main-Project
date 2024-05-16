@@ -59,6 +59,27 @@ namespace ImageEncryptCompress
             
             return encryptedImage;
         }
-        
+        public static RGBPixel[,] EncryptDecrypt(RGBPixel[,] imageMatrix, AlphaLFSR passwordGenerator)
+        {
+            width = ImageOperations.GetWidth(imageMatrix);
+            height = ImageOperations.GetHeight(imageMatrix);
+
+            RGBPixel[,] encryptedImage = CopyMatrix(imageMatrix);
+
+            int numberOfBits = 8;
+
+            for (int i = 0; i < height; i++)
+            {
+                for (int j = 0; j < width; j++)
+                {
+                    encryptedImage[i, j].red = (byte)(encryptedImage[i, j].red ^ (byte)passwordGenerator.GenerateKey(numberOfBits));
+                    encryptedImage[i, j].green = (byte)(encryptedImage[i, j].green ^ (byte)passwordGenerator.GenerateKey(numberOfBits));
+                    encryptedImage[i, j].blue = (byte)(encryptedImage[i, j].blue ^ (byte)passwordGenerator.GenerateKey(numberOfBits));
+                }
+            }
+
+            return encryptedImage;
+        }
+
     }
 }

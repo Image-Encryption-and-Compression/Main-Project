@@ -20,7 +20,7 @@ public class HuffmanTree
     /// <summary>
     /// Builds a Huffman tree for efficient data compression using a priority queue.
     /// </summary>
-    public void BuildHuffmanTree()
+    private void BuildHuffmanTree()
     {
         SimplePriorityQueue<HuffmanNode, int> pq = new SimplePriorityQueue<HuffmanNode, int>();
         for (int i = 0; i < histogram.Length; i++)
@@ -37,7 +37,7 @@ public class HuffmanTree
             HuffmanNode rightNode = pq.First;
             pq.Dequeue();
 
-            //MAX_VALUE to indicate to internal node: does not represent any value
+            //INTERNAL_NODE to indicate to internal node: does not represent any value
             HuffmanNode parent = new HuffmanNode(Constants.INTERNAL_NODE, leftNode, rightNode);
 
             pq.Enqueue(parent, parent.frequency);
@@ -49,7 +49,7 @@ public class HuffmanTree
     /// Traverses the Huffman tree using Breadth-First Search (BFS) and assigns each color value (0-255) its corresponding Huffman code
     /// I am using BFS due to it being more intuitive in complexity analysis, since it's iterative
     /// </summary>
-    public void BuildHuffmanCodes()
+    private void BuildHuffmanCodes()
     {
         // I am storing the Huffman code as a string since each node has a new Huffman code
         // They can't share the same StringBuilder, using StringBuilder here isn't suitable
@@ -99,11 +99,12 @@ public class HuffmanTree
     {
         WriteTreeToFile(root, ref writer);
     }
+
     /// <summary>
     /// Writes the Huffman tree structure to a file in a pre-order traversal.
     /// </summary>
-    /// <param name="node">The root node of the Huffman tree.</param>
-    /// <param name="writer">The BinaryWriter object used to write data to the binary file file.</param>
+    /// <param name="node">The current HuffmanNode to be written</param>
+    /// <param name="writer">The BinaryWriter object used to write data to the binary file</param>
     private void WriteTreeToFile(HuffmanNode node, ref BinaryWriter writer)
     {
         if (node == null)

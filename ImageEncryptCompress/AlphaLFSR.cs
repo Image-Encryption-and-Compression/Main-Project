@@ -40,7 +40,7 @@ namespace ImageEncryptCompress
             for (int i = 0; i < lengthOfSeed; i++)
             {
                 int number = alphaNumericDictionary[STR_seed[i]];
-                int [] bits = toBits(number);
+                int [] bits = ToBits(number);
                 for (int j = 0; j < alphaNumericBits; j++)
                 {
                     this.seed[(i * 6) + j] = bits[j];
@@ -48,7 +48,7 @@ namespace ImageEncryptCompress
             }
         }
 
-        public int Step()
+        public int ShiftBit()
         {
             int Bit = (seed[0] ^ seed[tapPosition]);
 
@@ -67,7 +67,7 @@ namespace ImageEncryptCompress
             int key = 0;
             for (int i = 1; i <= k; i++)
             {
-                int Bit = Step();
+                int Bit = ShiftBit();
                 key *= 2;
                 key += Bit;
             }
@@ -76,7 +76,7 @@ namespace ImageEncryptCompress
 
 
 
-        private int[] toBits(int x)
+        private int[] ToBits(int x)
         {
             string binaryString = Convert.ToString(x, 2).PadLeft(alphaNumericBits, '0'); 
             int[] bits = new int[alphaNumericBits];

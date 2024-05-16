@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AlphaLFSR.cs" />
     <Compile Include="ImageEncrypterDecrypter.cs" />
     <Compile Include="LFSR.cs" />
     <Compile Include="Constants.cs" />
@@ -75,6 +76,7 @@
     <Compile Include="PriorityQueue\StablePriorityQueueNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RetrievedHuffmanTree.cs" />
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
